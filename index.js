@@ -78,3 +78,36 @@ function exe03(){
          }
     }
 }
+
+function ex04(){
+  let partidos = ["PT", "PSDB", "PL", "PSB"];
+  let candidatos = [];
+  let i = 1;
+  for(let i=0;i<10;i++){
+      let objeto = {
+          codigo: Number(prompt("Informe o código do candidato")),
+          nome: prompt("Informe o nome do candidato"),
+          partido: prompt("Informe o partido do candidato").toUpperCase(),
+          qtde: Number(prompt("Informe a quantidade de votos do candidato")),
+      }
+
+      while(!partidos.includes(objeto.partido)){
+        objeto.partido = prompt("Insira um partido válido!!").toUpperCase();
+      }
+
+      candidatos.push(objeto)
+  }
+
+
+  let mv = candidatos[0].qtde;
+  let mvc = candidatos[0].nome;
+  let mpt = candidatos[0].partido;
+for(let i=0; i<10;i++){
+  if(candidatos[i].qtde > mv){
+    mv = vet[i].qtde;
+    mvc = vet[i].nome;
+    mpt = vet[i].partido;
+  }
+}
+  console.log(`Candidato mais votado: ${mvc} "\nSeu partido: ${mpt}\n Com a quantidade de ${mv} votos`);
+}

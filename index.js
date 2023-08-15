@@ -111,3 +111,131 @@ for(let i=0; i<10;i++){
 }
   console.log(`Candidato mais votado: ${mvc} "\nSeu partido: ${mpt}\n Com a quantidade de ${mv} votos`);
 }
+
+function bike(){
+    let bikes = [];
+    let marcas = ["CALOI","SCOTT","CANONDALE"]
+    let precos = 0.0;
+    let caloi = [];
+    let velha = [];
+
+    
+    for(let i; i <= 10; i++){
+        let obj = {
+            marca: prompt(`Entre a marca da bicicleta`),
+            modelo: prompt(`Entre o modelo da bicicleta`),
+            quadro: Number(prompt(`Entre o quadro da bicicleta`)),
+            aro: Number(prompt(`Entre o aro da bicicleta`)),
+            ano: Number(prompt(`Entre o ano da bicicleta`)),
+            preco: Number(prompt(`Entre o preço da bicicleta`))
+        };
+        while(!marcas.includes(obj.marca)){
+            obj.marca = prompt("Insira uma marca válida!").toUpperCase();
+          }
+          precos = obj.preco + precos;
+          bikes.push(obj);
+    }
+    for(let i; i <= bikes.length; i++){
+        if(bikes[i].marca == "CALOI"){
+            caloi.push(bikes[i]);
+        }
+    }
+    let mv = bikes[0];
+    for (let i = 0; i < bikes.length; i++) {
+        if(bikes[i].ano < mv.ano){
+            mv = bikes[i]
+
+        }else if(bikes[i].ano == mv.ano){
+            mv.push(bikes[i]);
+        }
+    }
+    
+    if(mv.length > 1){
+        console.log("Os mais velhos são:")z
+        mv.forEach((e) => console.log(e));
+    }
+    console.log(`A média dos preços é de: ${precos/bikes.length}`)
+}
+
+function farmacia(){
+        let farmacias = [] // declara vetor
+        for(let i=0;i<3;i++){
+            let objeto = {
+                codigo: Number(prompt(`Informe cÃ³digo`)),
+                nome: prompt(`Informe nome`),
+                endereco: prompt(`Informe endereÃ§o`),
+            }
+            // verifica se o cÃ³digo jÃ¡ existe
+            let achou = false // ainda nÃ£o encontramos farmÃ¡cia com o cÃ³digo
+            for(let j=0;j<farmacias.length;j++){
+                if (objeto.codigo == farmacias[j].codigo){
+                    achou = true // encontrei
+                    break // pÃ¡ra de procurar
+                }
+            }
+            if (!achou) {  // nÃ£o achou
+                farmacias.push(objeto) // insere no vetor
+            }
+            else {
+                alert(`JÃ¡ existe farmÃ¡cia com este cÃ³digo. Tente novamente`)
+                i-- // nÃ£o conta a tentativa com falha
+            }
+        }
+        // cria vetor de remedios
+        let remedios = []
+        for(let i=0;i<3; i++){
+            let objeto = {
+                codigoFarmacia: Number(prompt(`CÃ³digo da farmÃ¡cia`)),
+                nome: prompt('Nome do remÃ©dio'),
+                qtde: Number(prompt('Qtde do remÃ©dio')),
+                preco: Number(prompt('PreÃ§o do remÃ©dio'))
+            }
+            // procura se a farmÃ¡cia existe
+            let achou = false
+            for(let j=0; j<farmacias.length;j++){
+                if (objeto.codigoFarmacia == farmacias[j].codigo){
+                    achou = true
+                    break
+                }
+            }
+            if (achou){
+                remedios.push(objeto)
+            }
+            else {
+                alert('FarmÃ¡cia nÃ£o existe')
+                i--
+            }
+            
+        }
+        // realiza compras
+        for(let i=0;i<3;i++){
+            let compra = {
+                codigoFarmacia: Number(prompt(`CÃ³digo da farmÃ¡cia para compra`)),
+                nome: prompt('Nome do remÃ©dio para compra' ),
+                qtde: Number(prompt('Qtde do remÃ©dio para compra')),
+            }
+            // verifica se o remÃ©dio existe
+            let achou = false
+            for(let j=0;j<remedios.length;j++){
+                if ((compra.codigoFarmacia == remedios[j].codigoFarmacia) && 
+                    (compra.nome == remedios[j].nome)){ // remÃ©dio e farmÃ¡cia OK
+                      if (compra.qtde <= remedios[j].qtde){ // estoque suficiente
+                            remedios[j].qtde = remedios[j].qtde - compra.qtde
+                            alert('Compra com sucesso')
+                            achou = true
+                            break
+                      }      
+                      else {
+                        alert('Estoque insuficiente')
+                        i--
+                      }
+                }
+            }    
+            if (!achou){
+                alert('RemÃ©dio ou farmÃ¡cia nÃ£o existe')
+                i--
+            }   
+        }
+    
+    
+}

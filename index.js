@@ -112,50 +112,60 @@ for(let i=0; i<10;i++){
   console.log(`Candidato mais votado: ${mvc} "\nSeu partido: ${mpt}\n Com a quantidade de ${mv} votos`);
 }
 
-function bike(){
-    let bikes = [];
-    let marcas = ["CALOI","SCOTT","CANONDALE"]
-    let precos = 0.0;
-    let caloi = [];
-    let velha = [];
+function bike() {
+  let bikes = [];
+  let marcas = ["CALOI", "SCOTT", "CANONDALE"];
+  let totalPreco = 0.0;
+  let caloi = [];
+  let maisAntigas = [];
+  let maiorQuadro = {};
 
-    
-    for(let i; i <= 10; i++){
-        let obj = {
-            marca: prompt(`Entre a marca da bicicleta`),
-            modelo: prompt(`Entre o modelo da bicicleta`),
-            quadro: Number(prompt(`Entre o quadro da bicicleta`)),
-            aro: Number(prompt(`Entre o aro da bicicleta`)),
-            ano: Number(prompt(`Entre o ano da bicicleta`)),
-            preco: Number(prompt(`Entre o preço da bicicleta`))
-        };
-        while(!marcas.includes(obj.marca)){
-            obj.marca = prompt("Insira uma marca válida!").toUpperCase();
-          }
-          precos = obj.preco + precos;
-          bikes.push(obj);
-    }
-    for(let i; i <= bikes.length; i++){
-        if(bikes[i].marca == "CALOI"){
-            caloi.push(bikes[i]);
-        }
-    }
-    let mv = bikes[0];
-    for (let i = 0; i < bikes.length; i++) {
-        if(bikes[i].ano < mv.ano){
-            mv = bikes[i]
+  for (let i = 0; i < 10; i++) {
+    let obj = {
+      marca: prompt(`Entre a marca da bicicleta`).toUpperCase(),
+      modelo: prompt(`Entre o modelo da bicicleta`),
+      quadro: Number(prompt(`Entre o quadro da bicicleta`)),
+      aro: Number(prompt(`Entre o aro da bicicleta`)),
+      ano: Number(prompt(`Entre o ano da bicicleta`)),
+      preco: Number(prompt(`Entre o preço da bicicleta`)),
+    };
 
-        }else if(bikes[i].ano == mv.ano){
-            mv.push(bikes[i]);
-        }
+    while (!marcas.includes(obj.marca)) {
+      obj.marca = prompt("Insira uma marca válida!").toUpperCase();
     }
-    
-    if(mv.length > 1){
-        console.log("Os mais velhos são:")z
-        mv.forEach((e) => console.log(e));
+
+    totalPreco += obj.preco;
+    bikes.push(obj);
+
+    if (obj.marca === "CALOI") {
+      caloi.push(obj);
     }
-    console.log(`A média dos preços é de: ${precos/bikes.length}`)
+
+    if (!maisAntigas.length || obj.ano < maisAntigas[0].ano) {
+      maisAntigas = [obj];
+    } else if (obj.ano === maisAntigas[0].ano) {
+      maisAntigas.push(obj);
+    }
+
+    if (!maiorQuadro.quadro || obj.quadro > maiorQuadro.quadro) {
+      maiorQuadro = obj;
+    }
+  }
+
+  console.log(`A média dos preços é de: ${totalPreco / bikes.length}`);
+
+  console.log("As bicicletas mais antigas são:");
+  maisAntigas.forEach((bicicleta) => console.log(bicicleta));
+
+  console.log("Bicicletas da marca Caloi:");
+  caloi.forEach((bicicleta) => console.log(bicicleta));
+
+  let aro29 = bikes.filter((bicicleta) => bicicleta.aro === 29).length;
+  console.log(`Quantidade de bikes com aro 29: ${aro29}`);
+
+  console.log(`A bicicleta com o maior quadro: ${maiorQuadro}`);
 }
+
 
 function farmacia(){
         let farmacias = [] // declara vetor

@@ -167,85 +167,79 @@ function bike() {
 }
 
 
-function farmacia(){
-        let farmacias = [] // declara vetor
-        for(let i=0;i<3;i++){
-            let objeto = {
-                codigo: Number(prompt(`Informe cÃ³digo`)),
-                nome: prompt(`Informe nome`),
-                endereco: prompt(`Informe endereÃ§o`),
-            }
-            // verifica se o cÃ³digo jÃ¡ existe
-            let achou = false // ainda nÃ£o encontramos farmÃ¡cia com o cÃ³digo
-            for(let j=0;j<farmacias.length;j++){
-                if (objeto.codigo == farmacias[j].codigo){
-                    achou = true // encontrei
-                    break // pÃ¡ra de procurar
-                }
-            }
-            if (!achou) {  // nÃ£o achou
-                farmacias.push(objeto) // insere no vetor
-            }
-            else {
-                alert(`JÃ¡ existe farmÃ¡cia com este cÃ³digo. Tente novamente`)
-                i-- // nÃ£o conta a tentativa com falha
-            }
+principal(); // chama a função principal
+// a minha variável principal é uma função
+let principal = () => {
+  let vetFarmacias = [];
+  let vetRemedios = [];
+  cadastraFarmacias(vetFarmacias);
+  cadastraRemedios(vetRemedios, vetFarmacias);
+  vendaRemedios(vetRemedios);
+};
+
+let cadastraFarmacias = (vetFarmacias) => {
+  for (let i = 0; i < 5; i++) {
+    let novaFarmacia = {
+      codigo: Number(prompt('Código da farmacia')),
+      nome: prompt('Nome da farmácia'),
+      endereco: prompt('Endereço da farmácia'),
+    };
+    // verificar se o código da novaFarmácia está no vetor
+    // percorre o vetor vetFarmacias procurando por código já existente
+    while (vetFarmacias.some((farm) => farm.codigo == novaFarmacia.codigo)) {
+      novaFarmacia.codigo = Number(prompt('Código já existe, informe um novo'));
+    }
+    vetFarmacias.push(novaFarmacia);
+  }
+};
+
+let cadastraRemedios = (vetRemedios, vetFarmacias) => {
+  for (let i = 0; i < 5; i++) {
+    let novoRemedio = {
+      codigoFarmacia: Number(prompt('Código da farmácia')),
+      nome: prompt('Nome do remédio'),
+      qtde: Number('Qtde do remédio'),
+      preco: Number('Preço do remédio'),
+    };
+    // ! é negação
+    while (
+      !vetFarmacias.some((farm) => farm.codigo == novoRemedio.codigoFarmacia)
+    ) {
+      novoRemedio.codigoFarmacia = Number(
+        prompt('Farmácia não existe. Digite novamente')
+      );
+    }
+    vetRemedios.push(novoRemedio);
+  }
+};
+
+let vendaRemedios = (vetRemedios) => {
+  for (let cont = 0; cont < 5; cont++) {
+    let objVenda = {
+      codigo: Number(prompt('Código do remédio')),
+      nome: prompt('Nome do remédio'),
+      qtde: Number(prompt('Qtde vendida')),
+    };
+    // percorre o vetor vetRemedios procurando pelo código
+    // do remédio, e o nome do remédio
+    let achou = false; // não encontrei o remédio
+    for (let i = 0; i < vetRemedios.length; i++) {
+      if (
+        vetRemedios[i].codigoFarmacia == objVenda.codigo &&
+        vetRemedios[i].nome == objVenda.nome
+      ) {
+        achou = true; // achei o remédio
+        // vamos realizar a venda
+        if (vetRemedios[i].qtde >= objVenda.qtde) {
+          vetRemedios[i].qtde = vetRemedios[i].qtde - objVenda.qtde;
+        } else {
+          alert('Estoque insuficiente para esta venda');
         }
-        // cria vetor de remedios
-        let remedios = []
-        for(let i=0;i<3; i++){
-            let objeto = {
-                codigoFarmacia: Number(prompt(`CÃ³digo da farmÃ¡cia`)),
-                nome: prompt('Nome do remÃ©dio'),
-                qtde: Number(prompt('Qtde do remÃ©dio')),
-                preco: Number(prompt('PreÃ§o do remÃ©dio'))
-            }
-            // procura se a farmÃ¡cia existe
-            let achou = false
-            for(let j=0; j<farmacias.length;j++){
-                if (objeto.codigoFarmacia == farmacias[j].codigo){
-                    achou = true
-                    break
-                }
-            }
-            if (achou){
-                remedios.push(objeto)
-            }
-            else {
-                alert('FarmÃ¡cia nÃ£o existe')
-                i--
-            }
-            
-        }
-        // realiza compras
-        for(let i=0;i<3;i++){
-            let compra = {
-                codigoFarmacia: Number(prompt(`CÃ³digo da farmÃ¡cia para compra`)),
-                nome: prompt('Nome do remÃ©dio para compra' ),
-                qtde: Number(prompt('Qtde do remÃ©dio para compra')),
-            }
-            // verifica se o remÃ©dio existe
-            let achou = false
-            for(let j=0;j<remedios.length;j++){
-                if ((compra.codigoFarmacia == remedios[j].codigoFarmacia) && 
-                    (compra.nome == remedios[j].nome)){ // remÃ©dio e farmÃ¡cia OK
-                      if (compra.qtde <= remedios[j].qtde){ // estoque suficiente
-                            remedios[j].qtde = remedios[j].qtde - compra.qtde
-                            alert('Compra com sucesso')
-                            achou = true
-                            break
-                      }      
-                      else {
-                        alert('Estoque insuficiente')
-                        i--
-                      }
-                }
-            }    
-            if (!achou){
-                alert('RemÃ©dio ou farmÃ¡cia nÃ£o existe')
-                i--
-            }   
-        }
-    
-    
-}
+      }
+    }
+    if (!achou) {
+      alert('Produto não encontrado');
+    }
+  }
+};
+

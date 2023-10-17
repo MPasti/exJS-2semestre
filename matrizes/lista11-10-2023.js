@@ -1,3 +1,37 @@
+let principal = () => {
+
+    do {
+        opcao = Number(
+          prompt(
+            "Digite:\n1-Rodar Exercicio 1.\n2-Rodar Exercicio 2.\n3-Rodar Exercicio 3.\n4-Rodar Exercicio 4.\n5-Rodar Exercicio 5.\n6-Sair do programa"
+          )
+        );
+        switch (opcao) {
+          case 1:
+            exe01();
+            break;
+          case 2:
+            exe01();
+            break;
+          case 3:
+            exe01();
+            break;
+          case 4:
+            exe01();
+            break;
+          case 5:
+            exe01();
+            break;
+          case 6:
+            alert("Encerrando programa");
+            break;
+          default:
+            alert("Opção inválida");
+        }
+      } while (opcao != 6);
+}
+
+
 function exe01(){
     let matriz = []
     leitura_matriz(matriz)
@@ -11,7 +45,7 @@ let leitura_matriz = (matriz) => {
             matriz[i][j] = Number(prompt(`Valor matriz[${i}][${j}]`))
         }
     }
-    console.log(matriz)
+    alert(matriz)
 }
 
 let calculo_matriz = (matriz) => {
@@ -23,7 +57,7 @@ let calculo_matriz = (matriz) => {
             }
         }
     }
-    console.log(qntd)
+    alert(qntd)
 }
 
 
@@ -41,7 +75,7 @@ let leitura_matriz2 = (matriz) => {
             matriz[i][j] = Number(prompt(`Valor matriz[${i}][${j}]`))
         }
     }
-    console.log(matriz)
+    alert(matriz)
 }
 
 let calculo_matriz2 = (matriz) => {
@@ -55,7 +89,7 @@ let calculo_matriz2 = (matriz) => {
         }
         vet.push(qntd)
     }
-    console.log(vet)
+    alert(vet)
 }
 
 let media_matriz2 = (matriz) => {
@@ -72,11 +106,11 @@ let media_matriz2 = (matriz) => {
 
     if(qntd != 0){
         media = media/qntd
-        console.log(media)
+        alert(media)
     }
     else{
         media = 0
-        console.log(media)
+        alert(media)
     }
 }
 
@@ -95,7 +129,7 @@ let leitura_matriz3 = (matriz) => {
             matriz[i][j] = Number(prompt(`Valor matriz[${i}][${j}]`))
         }
     }
-    console.log(matriz)
+    alert(matriz)
 }
 
 let maior_matriz3 = (matriz) => {
@@ -111,7 +145,7 @@ let maior_matriz3 = (matriz) => {
             }
         }
     }
-    console.log(`Maior valor = ${maior} nos índices i = ${indice1}, j = ${indice2}`)
+    alert(`Maior valor = ${maior} nos índices i = ${indice1}, j = ${indice2}`)
 }
 
 let menor_matriz3 = (matriz) => {
@@ -127,7 +161,7 @@ let menor_matriz3 = (matriz) => {
             }
         }
     }
-    console.log(`Menor valor = ${menor} nos índices i = ${indice1}, j = ${indice2}`)
+    alert(`Menor valor = ${menor} nos índices i = ${indice1}, j = ${indice2}`)
 }
 
 function exe04(){
@@ -165,20 +199,20 @@ let calculos4 = (matriz, notas) => {
         soma = soma / 5
         notas.push(soma)
     }
-    console.log(notas)
+    alert(notas)
 }
 
 let resultados4 = (vetor, notas) => {
     for(i=0;i<15;i++){
         let situacao = ''
-        console.log(`Aluno ${i+1}:\nNome: ${vetor[i]}\nNota: ${notas[i]}`)
+        alert(`Aluno ${i+1}:\nNome: ${vetor[i]}\nNota: ${notas[i]}`)
         if(notas[i]>6){
             situacao = 'Aprovado'
         }
         else{
             situacao = 'Reprovado'
         }
-        console.log(`Situação: ${situacao}`)
+        alert(`Situação: ${situacao}`)
     }
 }
 
@@ -188,5 +222,62 @@ let media4 = (notas) => {
         m = m + notas[i]
     }
     m = m / 15
-    console.log(`Média da turma = ${m}`)
+    alert(`Média da turma = ${m}`)
 }
+
+function exe05() {
+    const matrizVendas = preencherMatrizVendas();
+    calcularTotalPorMes5(matrizVendas);
+    calcularTotalPorSemana5(matrizVendas);
+    calcularTotalAnual5(matrizVendas);
+}
+
+function preencherMatrizVendas() {
+    let matriz = new Array(12);
+
+    for (let i = 0; i < 12; i++) {
+        matriz[i] = new Array(4);
+        for (let j = 0; j < 4; j++) {
+            matriz[i][j] = Number(prompt(`Informe o valor de vendas para o mês ${i + 1}, semana ${j + 1}: `));
+        }
+    }
+
+    return matriz;
+}
+
+function calcularTotalPorMes5(matriz) {
+    const meses = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+
+    for (let i = 0; i < 12; i++) {
+        let totalMes = 0;
+        for (let j = 0; j < 4; j++) {
+            totalMes += matriz[i][j];
+        }
+        alert(`Total de vendas em ${meses[i]}: R$${totalMes}`);
+    }
+}
+
+function calcularTotalPorSemana5(matriz) {
+    for (let j = 0; j < 4; j++) {
+        let totalSemana = 0;
+        for (let i = 0; i < 12; i++) {
+            totalSemana += matriz[i][j];
+        }
+        alert(`Total de vendas na semana ${j + 1}: R$${totalSemana}`);
+    }
+}
+
+function calcularTotalAnual5(matriz) {
+    let totalAno = 0;
+    for (let i = 0; i < 12; i++) {
+        for (let j = 0; j < 4; j++) {
+            totalAno += matriz[i][j];
+        }
+    }
+    alert(`Total de vendas no ano: R$${totalAno}`);
+}
+
+principal();

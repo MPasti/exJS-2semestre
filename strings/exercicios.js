@@ -128,4 +128,122 @@ const exe11 = () => {
   console.log(teste);
 };
 
-function exe12() {}
+function ex12() {
+  let str = prompt('Entre com uma frase');
+  let str2 = str.split(' ');
+  let resposta = str2.length;
+  console.log(resposta - 1);
+}
+
+function ex13() {
+  let vetor = ['t', 'e', 's', 't', 'e', ' ', 'e', 's', 'p', 'a', 'ç', 'o'];
+
+  function removerEspacos(frase) {
+    let vetorSemEspacos = frase.filter((letra) => letra !== ' ');
+    return vetorSemEspacos;
+  }
+  let resultado = removerEspacos(vetor);
+  console.log(resultado);
+}
+
+function ex14() {
+  str = prompt('Insira um caractere');
+  l1 = prompt('Insira a letra que será substituida');
+  l2 = prompt('Insira a letra que a substituirá');
+  novaStr = str.replaceAll(l1, l2);
+  console.log(novaStr);
+}
+
+function exe15() {
+  let pessoas = [];
+  let nome, idade;
+
+  for (let i = 0; i < 10; i++) {
+    nome = prompt(`Entre com o nome da ${i + 1}° pessoa`);
+    idade = parseInt(prompt(`Entre com a idade da ${i + 1}° pessoa`));
+    if (idade < 0) {
+      break;
+    }
+    pessoas.push({ nome, idade });
+  }
+
+  if (pessoas.length > 0) {
+    let maisJovem = pessoas.reduce((pessoaAtual, pessoaSeguinte) => {
+      return pessoaAtual.idade < pessoaSeguinte.idade
+        ? pessoaAtual
+        : pessoaSeguinte;
+    });
+
+    let maisVelha = pessoas.reduce((pessoaAtual, pessoaSeguinte) => {
+      return pessoaAtual.idade > pessoaSeguinte.idade
+        ? pessoaAtual
+        : pessoaSeguinte;
+    });
+
+    console.log(
+      `A pessoa mais jovem é ${maisJovem.nome}, com ${maisJovem.idade} anos.`
+    );
+    console.log(
+      `A pessoa mais velha é ${maisVelha.nome}, com ${maisVelha.idade} anos.`
+    );
+  } else {
+    console.log('Nenhuma pessoa inserida.');
+  }
+}
+
+function exe16() {
+  let frase1 = prompt('Digite a primeira frase:');
+  let frase2 = prompt('Digite a segunda frase:');
+
+  let frase1Invertida = frase1
+    .split('')
+    .reverse()
+    .map((letra) => (letra === 'A' ? '*' : letra))
+    .join('');
+
+  let frase2Invertida = frase2
+    .split('')
+    .reverse()
+    .map((letra) => (letra === 'A' ? '*' : letra))
+    .join('');
+
+  console.log(`Resultado da primeira frase: ${frase1Invertida}`);
+  console.log(`Resultado da segunda frase: ${frase2Invertida}`);
+}
+
+function exe17() {
+  let caractere = prompt('Entre com um caractere:');
+  let i = parseInt(prompt('Entre com o primeiro corte:'));
+  let j = ParseInt(prompt('Entre com o segundo corte:'));
+
+  if (i < 0 || j < 0 || j >= caractere.length || i > j) {
+    console.log('Índices inválidos.');
+    return;
+  }
+
+  let segmento = caractere.substring(i, j + 1);
+
+  console.log(`O segmento S[${i}..${j}] é: ${segmento}`);
+}
+
+function exe18() {
+  let caractere = prompt('Entre com um caractere:');
+  let c = parseInt(prompt('Entre a letra:'));
+  let posicao = ParseInt(prompt('Entre com a posição:'));
+
+  if (posicao < 0 || posicao >= caractere.length) {
+    console.log('Posição inicial inválida.');
+    return;
+  }
+
+  for (let i = posicao; i < caractere.length; i++) {
+    if (caractere[i] === c) {
+      console.log(`O caractere ${c} foi encontrado na posição ${i}.`);
+      return;
+    }
+  }
+
+  console.log(
+    `O caractere ${c} não foi encontrado a partir da posição ${posicao}.`
+  );
+}

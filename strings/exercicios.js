@@ -92,7 +92,7 @@ function exe092() {
   let juntado = reverter.join('');
   console.log(juntado);
 }
-(function exe10() {
+function exe10() {
   let input = prompt('Entre um valor');
   let teste = input
     .replace(/a/g, '')
@@ -101,7 +101,7 @@ function exe092() {
     .replace(/o/g, '')
     .replace(/u/g, '');
   console.log(teste);
-})();
+}
 
 const exe11 = () => {
   let input = prompt('Entre um valor');
@@ -128,25 +128,23 @@ const exe11 = () => {
   console.log(teste);
 };
 
-function ex12() {
+function exe12() {
   let str = prompt('Entre com uma frase');
   let str2 = str.split(' ');
   let resposta = str2.length;
   console.log(resposta - 1);
 }
 
-function ex13() {
-  let vetor = ['t', 'e', 's', 't', 'e', ' ', 'e', 's', 'p', 'a', 'ç', 'o'];
+function exe13() {
+  str = prompt('Insira um caractere');
+  let vetor = str.split('');
 
-  function removerEspacos(frase) {
-    let vetorSemEspacos = frase.filter((letra) => letra !== ' ');
-    return vetorSemEspacos;
-  }
-  let resultado = removerEspacos(vetor);
-  console.log(resultado);
+  let vetorSemEspacos = vetor.filter((letra) => letra !== ' ');
+
+  console.log(vetorSemEspacos);
 }
 
-function ex14() {
+function exe14() {
   str = prompt('Insira um caractere');
   l1 = prompt('Insira a letra que será substituida');
   l2 = prompt('Insira a letra que a substituirá');
@@ -181,13 +179,13 @@ function exe15() {
     });
 
     console.log(
-      `A pessoa mais jovem é ${maisJovem.nome}, com ${maisJovem.idade} anos.`
+      `A pessoa mais jovem é ${maisJovem.nome}, e tem ${maisJovem.idade} anos`
     );
     console.log(
-      `A pessoa mais velha é ${maisVelha.nome}, com ${maisVelha.idade} anos.`
+      `A pessoa mais velha é ${maisVelha.nome}, e tem ${maisVelha.idade} anos`
     );
   } else {
-    console.log('Nenhuma pessoa inserida.');
+    console.log('Nenhuma pessoa inserida');
   }
 }
 
@@ -217,7 +215,7 @@ function exe17() {
   let j = ParseInt(prompt('Entre com o segundo corte:'));
 
   if (i < 0 || j < 0 || j >= caractere.length || i > j) {
-    console.log('Índices inválidos.');
+    console.log('Índices inválidos');
     return;
   }
 
@@ -228,22 +226,147 @@ function exe17() {
 
 function exe18() {
   let caractere = prompt('Entre com um caractere:');
-  let c = parseInt(prompt('Entre a letra:'));
-  let posicao = ParseInt(prompt('Entre com a posição:'));
+  let c = parseInt(prompt('Entre com a letra:'));
+  let posicao = parseInt(prompt('Entre com a posição:'));
 
   if (posicao < 0 || posicao >= caractere.length) {
-    console.log('Posição inicial inválida.');
-    return;
-  }
+    console.log('Posição inicial inválida');
+  } else {
+    let encontrado = false;
 
-  for (let i = posicao; i < caractere.length; i++) {
-    if (caractere[i] === c) {
-      console.log(`O caractere ${c} foi encontrado na posição ${i}.`);
-      return;
+    for (let i = posicao; i < caractere.length; i++) {
+      if (caractere[i] === c) {
+        console.log(`O caractere ${c} foi encontrado na posição ${i}`);
+        encontrado = true;
+        break;
+      }
+    }
+
+    if (!encontrado) {
+      console.log(
+        `O caractere ${c} não foi encontrado a partir da posição ${posicao}`
+      );
+    }
+  }
+}
+
+function exe19() {
+  let p1 = prompt('Entre com a primeira palavra:');
+  let p2 = prompt('Entre com a segunda palavra:');
+
+  if (p1.toLowerCase() < p2.toLowerCase()) {
+    console.log(`'${p1}' vem antes de '${p2}' na ordem alfabética`);
+  } else if (p1.toLowerCase() > p2.toLowerCase()) {
+    console.log(`'${p2}' vem antes de '${p1}' na ordem alfabética`);
+  } else {
+    console.log(`'${p1}' e '${p2}' são iguais`);
+  }
+}
+
+function exe20() {
+  let textoOriginal = prompt('Entre com uma frase:');
+  let textoCodificado = '';
+  for (let i = 0; i < textoOriginal.length; i++) {
+    let charAtual = textoOriginal[i];
+    if (charAtual.match(/[A-Z]/)) {
+      let codigoAscii = charAtual.charCodeAt(0);
+      let codigoAsciiCodificado = ((codigoAscii - 65 + 3) % 26) + 65;
+      let charCodificado = String.fromCharCode(codigoAsciiCodificado);
+      textoCodificado += charCodificado;
+    } else if (charAtual.match(/[a-z]/)) {
+      let codigoAscii = charAtual.charCodeAt(0);
+      let codigoAsciiCodificado = ((codigoAscii - 97 + 3) % 26) + 97;
+      let charCodificado = String.fromCharCode(codigoAsciiCodificado);
+      textoCodificado += charCodificado;
+    } else {
+      textoCodificado += charAtual;
     }
   }
 
+  console.log(`Texto Original: ${textoOriginal}`);
+  console.log(`Texto Codificado: ${textoCodificado}`);
+}
+
+function exe21() {
+  let valor = prompt('Entre com o primeiro caractere:');
+  let valor2 = toLowerCase();
+  let invertido = valor2.split('').reverse().join('');
+
+  if (valor2 === invertido) {
+    console.log(`${valor} é um palíndromo!`);
+  } else {
+    console.log(`${valor} não é um palíndromo`);
+  }
+}
+
+function exe22() {
+  let valor = prompt('Entre com a primeira string:');
+  let valor2 = prompt('Entre com a segunda string:');
+
+  let resultado = valor.endsWith(valor2);
+
+  if (resultado) {
+    console.log('A segunda string está contida no final da primeira');
+  } else {
+    console.log('A segunda string não está contida no final da primeira');
+  }
+}
+
+function exe23() {
+  let str1 = prompt('Entre com o primeiro caractere:');
+  let str2 = prompt('Entre com o segundo caractere:');
+  let N = parseInt(prompt('Entre com um valor inteiro:'));
+
+  while (N <= 0) {
+    N = parseInt(prompt('Entre com um valor inteiro:'));
+  }
+
+  str1 = str1.concat(str2.substring(0, N));
+
+  str1 = str1.concat('\0');
+
+  console.log(`Resultado: ${str1}`);
+}
+
+function exe24() {
+  let cadeiaA = prompt('Entre com a cadeia A:');
+  let cadeiaB = prompt('Entre com a cadeia B:');
+
+  let contador = 0;
+  let indice = cadeiaB.indexOf(cadeiaA);
+
+  while (indice !== -1) {
+    contador++;
+    indice = cadeiaB.indexOf(cadeiaA, indice + 1);
+  }
   console.log(
-    `O caractere ${c} não foi encontrado a partir da posição ${posicao}.`
+    `A cadeia "${cadeiaA}" ocorre ${contador} vezes na cadeia "${cadeiaB}".`
   );
+}
+
+function exe25() {
+  let data = prompt('Entre com uma data no formato "DD/MM/AAAA":');
+
+  const padraoFormato = /^\d{2}\/\d{2}\/\d{4}$/;
+  while (!padraoFormato.test(data)) {
+    data = prompt('Formato inválido. Utilize o formato "DD/MM/AAAA".');
+  }
+
+  const partes = data.split('/');
+  const dia = parseInt(partes[0]);
+  const mes = parseInt(partes[1]);
+  const ano = parseInt(partes[2]);
+
+  while (isNaN(dia) || isNaN(mes) || isNaN(ano)) {
+    data = prompt('Entre com uma data no formato "DD/MM/AAAA":');
+  }
+
+  let dataFormatada = { dia, mes, ano };
+
+  if (dataFormatada) {
+    console.log('Data Formatada:');
+    console.log(`Dia: ${dataFormatada.dia}`);
+    console.log(`Mês: ${dataFormatada.mes}`);
+    console.log(`Ano: ${dataFormatada.ano}`);
+  }
 }
